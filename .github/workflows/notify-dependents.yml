@@ -14,6 +14,7 @@ on:
 jobs:
   update-dependents:
     name: Notify dependents
+    if: false # craci: disabled — triggers downstream ruff-pre-commit workflow (call home)
     environment:
       name: release
     runs-on: ubuntu-latest

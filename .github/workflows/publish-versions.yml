@@ -15,6 +15,7 @@ permissions: {}
 
 jobs:
   publish-versions:
+    if: false # craci: disabled — pushes/PRs version info to astral-sh/versions
     runs-on: ubuntu-latest
     environment: release
     env:

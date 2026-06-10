@@ -22,6 +22,7 @@ permissions:
 
 jobs:
   mkdocs:
+    if: false # craci: disabled — deploys docs by pushing/PRing to astral-sh/docs
     environment:
       name: release
     runs-on: ubuntu-latest

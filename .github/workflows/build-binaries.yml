@@ -36,9 +36,13 @@ env:
 
 jobs:
   sdist:
-    if: ${{ !contains(github.event.pull_request.labels.*.name, 'no-build') }}
-    runs-on: ubuntu-latest
+    if: false # craci: disabled — builds and uploads release sdist
+    runs-on: [craci]
     steps:
+      - uses: cracicorp/setup@v1
+        with:
+          size: "2"
+          image: "default"
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           submodules: recursive
@@ -66,7 +70,7 @@ jobs:
           path: dist
 
   macos-x86_64:
-    if: ${{ !contains(github.event.pull_request.labels.*.name, 'no-build') }}
+    if: false # craci: disabled — unsupported macOS runner + uploads release binaries
     runs-on: macos-15
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
@@ -109,7 +113,7 @@ jobs:
             *.sha256
 
   macos-aarch64:
-    if: ${{ !contains(github.event.pull_request.labels.*.name, 'no-build') }}
+    if: false # craci: disabled — unsupported macOS runner + uploads release binaries
     runs-on: macos-15
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
@@ -157,7 +161,7 @@ jobs:
             *.sha256
 
   windows:
-    if: ${{ !contains(github.event.pull_request.labels.*.name, 'no-build') }}
+    if: false # craci: disabled — unsupported Windows runner + uploads release binaries
     runs-on: windows-latest
     strategy:
       matrix:
@@ -215,14 +219,18 @@ jobs:
             *.sha256
 
   linux:
-    if: ${{ !contains(github.event.pull_request.labels.*.name, 'no-build') }}
-    runs-on: ubuntu-latest
+    if: false # craci: disabled — builds and uploads release wheels/binaries
+    runs-on: [craci]
     strategy:
       matrix:
         target:
           - x86_64-unknown-linux-gnu
           - i686-unknown-linux-gnu
     steps:
+      - uses: cracicorp/setup@v1
+        with:
+          size: "4"
+          image: "default"
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           submodules: recursive
@@ -273,8 +281,8 @@ jobs:
             *.sha256
 
   linux-cross:
-    if: ${{ !contains(github.event.pull_request.labels.*.name, 'no-build') }}
-    runs-on: ubuntu-latest
+    if: false # craci: disabled — container cross-compile + uploads release wheels/binaries
+    runs-on: [craci]
     strategy:
       matrix:
         platform:
@@ -305,6 +313,10 @@ jobs:
             manylinux: 2_31
 
     steps:
+      - uses: cracicorp/setup@v1
+        with:
+          size: "4"
+          image: "default"
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           submodules: recursive
@@ -363,14 +375,18 @@ jobs:
             *.sha256
 
   musllinux:
-    if: ${{ !contains(github.event.pull_request.labels.*.name, 'no-build') }}
-    runs-on: ubuntu-latest
+    if: false # craci: disabled — musllinux container build (docker) + uploads release wheels/binaries
+    runs-on: [craci]
     strategy:
       matrix:
         target:
           - x86_64-unknown-linux-musl
           - i686-unknown-linux-musl
     steps:
+      - uses: cracicorp/setup@v1
+        with:
+          size: "4"
+          image: "default"
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           submodules: recursive
@@ -424,8 +440,8 @@ jobs:
             *.sha256
 
   musllinux-cross:
-    if: ${{ !contains(github.event.pull_request.labels.*.name, 'no-build') }}
-    runs-on: ubuntu-latest
+    if: false # craci: disabled — container cross-compile + uploads release wheels/binaries
+    runs-on: [craci]
     strategy:
       matrix:
         platform:
@@ -436,6 +452,10 @@ jobs:
             arch: armv7
 
     steps:
+      - uses: cracicorp/setup@v1
+        with:
+          size: "4"
+          image: "default"
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           submodules: recursive

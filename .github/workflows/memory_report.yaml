@@ -41,9 +41,14 @@ env:
 jobs:
   memory_report:
     name: Compute memory usage diff
-    runs-on: ${{ github.repository == 'astral-sh/ruff' && 'depot-ubuntu-22.04-32' || 'ubuntu-latest' }}
+    if: false # craci: disabled — uploads memory report consumed by astral-sh-bot to post PR comments
+    runs-on: [craci]
     timeout-minutes: 20
     steps:
+      - uses: cracicorp/setup@v1
+        with:
+          size: "8"
+          image: "default"
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           path: ruff

@@ -26,6 +26,7 @@ env:
 
 jobs:
   publish:
+    if: false # craci: disabled — deploys ty playground to Cloudflare Pages
     runs-on: ubuntu-latest
     environment: release-playground
     env:
